@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Быстрый старт. Размещение интерактивной карты на странице</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <script src="https://api-maps.yandex.ru/2.1/?apikey=0bc46b5e-f9f4-4fe3-81fd-5268da08ff41&lang=ru_RU"
+            type="text/javascript"></script>
+</head>
+
+<body>
+<div class="user-info">
+    <a href="/logout">Logout</a>
+</div>
+<div id="map" style="width: 600px; height: 400px"></div>
+<script type="text/javascript">
+    ymaps.ready(init);
+
+    function init() {
+        var map = new ymaps.Map("map", {
+            center: [55.733842, 37.588144],
+            zoom: 10
+        });
+
+        map.controls.add('zoomControl');
+
+        map.controls.remove('searchControl');
+
+        var searchControl = new ymaps.control.SearchControl({
+            options: {
+                provider: 'yandex#search',
+                useMapBounds: true,
+                noCentering: true,
+                size: 'large',
+                zoomMargin: 10,
+                float: 'right',
+                noPlacemark: true,
+                providerOptions: {
+                    resultsPerPage: 5,
+                    types: ['biz']
+                }
+            }
+        });
+
+        map.controls.add(searchControl);
+
+    }
+</script>
+</body>
+</html>
